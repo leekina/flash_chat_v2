@@ -25,25 +25,25 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       duration: Duration(seconds: 1),
       vsync: this,
     );
-    animation = CurvedAnimation(parent: controller, curve: Curves.ease);
+    //animation = CurvedAnimation(parent: controller, curve: Curves.ease);
     controller.forward();
-    animation.addStatusListener((status) {
-      // if (status == AnimationStatus.completed) {
-      //   controller.reverse();
-      // } else if (status == AnimationStatus.dismissed) {
-      //   controller.forward();
-      // }
-    });
-
-    controller.addListener(() {
+    animation =
+        ColorTween(begin: Colors.white, end: Colors.red).animate(controller);
+    animation.addListener(() {
       setState(() {});
     });
+
+    animateColor();
+  }
+
+  void animateColor() {
+    controller.forward();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation.value,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
